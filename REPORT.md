@@ -39,3 +39,17 @@ The consumption/detail.html template was implemented based on the summary.html m
 consuption/urls.py:
 
 the "url(r'^summary/$', views.summary)," was removed to simplify the url tree. The detail url modified to accept the dUser_key variable
+
+admin.py:
+
+Registered a basic form of the models. This needs to be improved.
+
+No admin user has been created
+
+To do list:
+
++ Explore better way of importing external data, experiment with build-in migrate functionality
+
++ Improve admin site
+
++ Develop testing scripts
