@@ -1,5 +1,50 @@
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="http://cdn.pydata.org/bokeh/release/bokeh-0.12.4.min.css" type="text/css" />
+	<style>
+	table {
+		font-family: arial, sans-serif;
+		border-collapse: collapse;
+		width: 100%;
+	}
 
-<h1>{{message}}</h1>
+	td, th {
+		border: 2px solid black;
+		text-align: left;
+		padding: 8px;
+	}
 
-{% endblock %}
+	tr:nth-child(even) {
+		background-color: #dddddd;
+	}
+	</style>
+</head>
+<body>
+   <div style="width: 100%;">
+   <div style="float:left; width: 50%">
+   {{the_div | safe}}
+   </div>
+   <div style="float:left;">
+   <table>
+     <tr>
+        <th>Customer Id</th>
+        <th>Area</th>
+		<th>Tariff</th>
+     </tr>
+	 {% for i in the_user %}
+	 <tr>
+        <td><a href="/detail/">{{ i.user_id }}</a></td>
+		<td>{{i.user_area}}</td>
+		<td>{{i.user_tariff}}</td>
+	 </tr>
+       {% endfor %}
+   </table>
+   </div>
+</div>
+    
+</body>
+    <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-0.12.4.min.js"></script>
+    {{the_script | safe}}
+</html> 
