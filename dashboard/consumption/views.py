@@ -24,8 +24,7 @@ def summary(request):
   xData=[]
   yData=[]
   for i in Summary.objects.all():
-      #removes the timezone information
-	  xData.append(i.summary_time.replace(tzinfo=None))
+      xData.append(i.summary_time.replace(tzinfo=None))#removes the timezone information
       yData.append(i.summary_use)
   plot.circle(xData, yData)
   #Formating the plot
