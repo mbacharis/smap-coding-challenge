@@ -23,10 +23,10 @@
 </head>
 <body>
    <div style="width: 100%;">
-   <div style="float:left; width: 50%">
+   <div style="float:left; width: 80%">
    {{the_div | safe}}
    </div>
-   <div style="float:left;">
+   <div style="float:right;">
    <table>
      <tr>
         <th>Customer Id</th>
@@ -35,7 +35,7 @@
      </tr>
 	 {% for i in the_user %}
 	 <tr>
-        <td><a href="/detail/">{{ i.user_id }}</a></td>
+        <td><a href="detail/{{i.id}}/">{{ i.user_id }}</a></td>
 		<td>{{i.user_area}}</td>
 		<td>{{i.user_tariff}}</td>
 	 </tr>

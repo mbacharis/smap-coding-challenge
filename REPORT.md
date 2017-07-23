@@ -18,12 +18,24 @@ Also for test purposes there is a break in lines 67-68 that should be removed at
 
 views.py: 
 
-Bokeh is used to create the plot with the summary data. This is used as Bokeh can directly output in html and has also interactive features (to turn these off uncomment from views.py line 34).
+Bokeh is used to create the plot with the summary data. This is used as Bokeh can directly output in html and has also interactive features (to turn these on comment from views.py line 34).
 
-User.objects.all() is passed to the template to provide the data for the creation of the table in the template. 
+User.objects.all() is passed to the template to provide the data for the creation of the table in the template.
+
+<Update> The detail view has been implemented based on the summary view with the addition of the variable dUser_key 
 
 Templates - consumption/summary.html:
 
 The template imports some styles for Bokeh and splits the screen in two for the plot and the table. 
 
-In the first implementation the hyperlinks for the table just point to "/detail/"  
+In the first implementation the hyperlinks for the table just point to "/detail/"
+ 
+<Update> with the full detail implementation they now point "/detail/'user_id'" 
+
+Templates - consumption/detail.html:
+
+The consumption/detail.html template was implemented based on the summary.html modifying the table to display details for one user and adding a line with a hypelink for returning back to the summary view.
+
+consuption/urls.py:
+
+the "url(r'^summary/$', views.summary)," was removed to simplify the url tree. The detail url modified to accept the dUser_key variable

@@ -1,3 +1,51 @@
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="http://cdn.pydata.org/bokeh/release/bokeh-0.12.4.min.css" type="text/css" />
+	<style>
+	table {
+		font-family: arial, sans-serif;
+		border-collapse: collapse;
+		width: 100%;
+	}
 
-{% endblock %}
+	td, th {
+		border: 2px solid black;
+		text-align: left;
+		padding: 8px;
+	}
+
+	tr:nth-child(even) {
+		background-color: #dddddd;
+	}
+	</style>
+</head>
+<body>
+   <div style="width: 100%;">
+   <div style="float:left; width: 80%">
+   {{the_div | safe}}
+   </div>
+   <div style="float:right;">
+   <table>
+     <tr>
+        <th>Customer Id</th>
+        <th>Area</th>
+		<th>Tariff</th>
+     </tr>
+	 <tr>
+        <td>{{the_user.user_id }}</td>
+		<td>{{the_user.user_area}}</td>
+		<td>{{the_user.user_tariff}}</td>
+	 </tr>
+	 <tr>
+        <td colspan="3"><a href="/">Back to Summary </a></td>
+	 </tr>
+   </table>
+   </div>
+</div>
+    
+</body>
+    <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-0.12.4.min.js"></script>
+    {{the_script | safe}}
+</html> 

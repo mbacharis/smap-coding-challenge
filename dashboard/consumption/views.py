@@ -14,13 +14,10 @@ from consumption.models import User,Summary
 import pytz
 
 def summary(request):
-#  context = {
-#      'message': 'Hello!',
-#  }
   #the x_axis_type='datetime' is added to 
   #allow Bokeh to correctly render the datetime
   #the data can't have timezone information
-  plot = figure(width=700,height=350, responsive=True,x_axis_type='datetime')
+  plot = figure(width=700,height=300, responsive=True,x_axis_type='datetime')
   xData=[]
   yData=[]
   for i in Summary.objects.all():
@@ -30,7 +27,7 @@ def summary(request):
   #Formating the plot
   #Remove Bokeh logo and toolbars
   plot.toolbar.logo = None
-  #plot.toolbar_location = None
+  plot.toolbar_location = None
   #adds axis labels
   plot.xaxis.axis_label='Date'
   plot.yaxis.axis_label='Total Consumption / Wh'
@@ -38,7 +35,25 @@ def summary(request):
   context={"the_script": script, "the_div": div,"the_user":User.objects.all(),}
   return render(request, 'consumption/summary.html', context)
 
-def detail(request):
-  context = {
-  }
+def detail(request, dUser_key):
+  #the x_axis_type='datetime' is added to 
+  #allow Bokeh to correctly render the datetime
+  #the data can't have timezone information
+  plot = figure(width=700,height=300, responsive=True,x_axis_type='datetime')
+  dUser=User.objects.all()[int(dUser_key)-1]
+  xData=[]
+  yData=[]
+  for i in dUser.energyuse_set.all():
+      xData.append(i.EnergyUse_time.replace(tzinfo=None))#removes the timezone information
+      yData.append(i.EnergyUse_consumption)
+  plot.circle(xData, yData)
+  #Formating the plot
+  #Remove Bokeh logo and toolbars
+  plot.toolbar.logo = None
+  plot.toolbar_location = None
+  #adds axis labels
+  plot.xaxis.axis_label='Date'
+  plot.yaxis.axis_label='Consumption / Wh'
+  script, div = components(plot)	  
+  context={"the_script": script, "the_div": div,"the_user":dUser,}
   return render(request, 'consumption/detail.html', context)
